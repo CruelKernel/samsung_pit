@@ -4,6 +4,8 @@ meta:
   license: CC0-1.0
   file-extension: pit
   endian: le
+  imports:
+    - samsung_signature
 seq:
   - id: magic
     contents: [ 0x76, 0x98, 0x34, 0x12 ]
@@ -29,38 +31,9 @@ seq:
     type: partition
     repeat: expr
     repeat-expr: entry_count
-  - id: signer_name
-    type: strz
-    size: 16
-    encoding: ASCII
-  - id: signer_ver
-    type: strz
-    size: 16
-    encoding: ASCII
-  - id: firmware_ver
-    type: strz
-    size: 32
-    encoding: ASCII
-  - id: firmware_timestamp
-    type: strz
-    size: 16
-    encoding: ASCII
-  - id: phone_model
-    type: strz
-    size: 32
-    encoding: ASCII
-  - id: board1
-    type: strz
-    size: 16
-    encoding: ASCII
-  - id: board2
-    type: strz
-    size: 16
-    encoding: ASCII
-  - id: unknown_type
-    type: strz
-    size: 8
-    encoding: ASCII
+  - id: signature
+    type: samsung_signature
+    if: not _io.eof
 types:
   partition:
     seq:

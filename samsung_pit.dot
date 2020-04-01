@@ -19,14 +19,7 @@ digraph {
 			<TR><TD PORT="unknown8_pos">26</TD><TD PORT="unknown8_size">2</TD><TD>u2le</TD><TD PORT="unknown8_type">unknown8</TD></TR>
 			<TR><TD PORT="partitions_pos">28</TD><TD PORT="partitions_size">132</TD><TD>Partition</TD><TD PORT="partitions_type">partitions</TD></TR>
 			<TR><TD COLSPAN="4" PORT="partitions__repeat">repeat entry_count times</TD></TR>
-			<TR><TD PORT="signer_name_pos">...</TD><TD PORT="signer_name_size">16</TD><TD>str(ASCII)</TD><TD PORT="signer_name_type">signer_name</TD></TR>
-			<TR><TD PORT="signer_ver_pos">...</TD><TD PORT="signer_ver_size">16</TD><TD>str(ASCII)</TD><TD PORT="signer_ver_type">signer_ver</TD></TR>
-			<TR><TD PORT="firmware_ver_pos">...</TD><TD PORT="firmware_ver_size">32</TD><TD>str(ASCII)</TD><TD PORT="firmware_ver_type">firmware_ver</TD></TR>
-			<TR><TD PORT="firmware_timestamp_pos">...</TD><TD PORT="firmware_timestamp_size">16</TD><TD>str(ASCII)</TD><TD PORT="firmware_timestamp_type">firmware_timestamp</TD></TR>
-			<TR><TD PORT="phone_model_pos">...</TD><TD PORT="phone_model_size">32</TD><TD>str(ASCII)</TD><TD PORT="phone_model_type">phone_model</TD></TR>
-			<TR><TD PORT="board1_pos">...</TD><TD PORT="board1_size">16</TD><TD>str(ASCII)</TD><TD PORT="board1_type">board1</TD></TR>
-			<TR><TD PORT="board2_pos">...</TD><TD PORT="board2_size">16</TD><TD>str(ASCII)</TD><TD PORT="board2_type">board2</TD></TR>
-			<TR><TD PORT="unknown_type_pos">...</TD><TD PORT="unknown_type_size">8</TD><TD>str(ASCII)</TD><TD PORT="unknown_type_type">unknown_type</TD></TR>
+			<TR><TD PORT="signature_pos">...</TD><TD PORT="signature_size">0</TD><TD>SamsungSignature</TD><TD PORT="signature_type">signature</TD></TR>
 		</TABLE>>];
 		subgraph cluster__partition {
 			label="SamsungPit::Partition";
@@ -51,4 +44,5 @@ digraph {
 	}
 	samsung_pit__seq:partitions_type -> partition__seq [style=bold];
 	samsung_pit__seq:entry_count_type -> samsung_pit__seq:partitions__repeat [color="#404040"];
+	samsung_pit__seq:signature_type -> samsung_signature__seq [style=bold];
 }

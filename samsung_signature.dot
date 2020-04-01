@@ -1,0 +1,27 @@
+digraph {
+	rankdir=LR;
+	node [shape=plaintext];
+	subgraph cluster__samsung_signature {
+		label="SamsungSignature";
+		graph[style=dotted];
+
+		samsung_signature__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+			<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+		</TABLE>>];
+		subgraph cluster__samsung_signature {
+			label="SamsungSignature::SamsungSignature";
+			graph[style=dotted];
+
+			samsung_signature__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="signer_name_pos">0</TD><TD PORT="signer_name_size">16</TD><TD>str(ASCII)</TD><TD PORT="signer_name_type">signer_name</TD></TR>
+				<TR><TD PORT="signer_ver_pos">16</TD><TD PORT="signer_ver_size">16</TD><TD>str(ASCII)</TD><TD PORT="signer_ver_type">signer_ver</TD></TR>
+				<TR><TD PORT="firmware_ver_pos">32</TD><TD PORT="firmware_ver_size">32</TD><TD>str(ASCII)</TD><TD PORT="firmware_ver_type">firmware_ver</TD></TR>
+				<TR><TD PORT="firmware_timestamp_pos">64</TD><TD PORT="firmware_timestamp_size">16</TD><TD>str(ASCII)</TD><TD PORT="firmware_timestamp_type">firmware_timestamp</TD></TR>
+				<TR><TD PORT="phone_model_pos">80</TD><TD PORT="phone_model_size">32</TD><TD>str(ASCII)</TD><TD PORT="phone_model_type">phone_model</TD></TR>
+				<TR><TD PORT="board1_pos">112</TD><TD PORT="board1_size">16</TD><TD>str(ASCII)</TD><TD PORT="board1_type">board1</TD></TR>
+				<TR><TD PORT="board2_pos">128</TD><TD PORT="board2_size">16</TD><TD>str(ASCII)</TD><TD PORT="board2_type">board2</TD></TR>
+			</TABLE>>];
+		}
+	}
+}
