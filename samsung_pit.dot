@@ -9,29 +9,63 @@ digraph {
 			<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
 			<TR><TD PORT="magic_pos">0</TD><TD PORT="magic_size">4</TD><TD>76 98 34 12</TD><TD PORT="magic_type">magic</TD></TR>
 			<TR><TD PORT="entry_count_pos">4</TD><TD PORT="entry_count_size">4</TD><TD>u4le</TD><TD PORT="entry_count_type">entry_count</TD></TR>
-			<TR><TD PORT="unknown1_pos">8</TD><TD PORT="unknown1_size">4</TD><TD>u4le</TD><TD PORT="unknown1_type">unknown1</TD></TR>
-			<TR><TD PORT="unknown2_pos">12</TD><TD PORT="unknown2_size">4</TD><TD>u4le</TD><TD PORT="unknown2_type">unknown2</TD></TR>
-			<TR><TD PORT="unknown3_pos">16</TD><TD PORT="unknown3_size">2</TD><TD>u2le</TD><TD PORT="unknown3_type">unknown3</TD></TR>
-			<TR><TD PORT="unknown4_pos">18</TD><TD PORT="unknown4_size">2</TD><TD>u2le</TD><TD PORT="unknown4_type">unknown4</TD></TR>
-			<TR><TD PORT="unknown5_pos">20</TD><TD PORT="unknown5_size">2</TD><TD>u2le</TD><TD PORT="unknown5_type">unknown5</TD></TR>
-			<TR><TD PORT="unknown6_pos">22</TD><TD PORT="unknown6_size">2</TD><TD>u2le</TD><TD PORT="unknown6_type">unknown6</TD></TR>
-			<TR><TD PORT="unknown7_pos">24</TD><TD PORT="unknown7_size">2</TD><TD>u2le</TD><TD PORT="unknown7_type">unknown7</TD></TR>
-			<TR><TD PORT="unknown8_pos">26</TD><TD PORT="unknown8_size">2</TD><TD>u2le</TD><TD PORT="unknown8_type">unknown8</TD></TR>
+			<TR><TD PORT="port_pos">8</TD><TD PORT="port_size">4</TD><TD>str(ASCII)</TD><TD PORT="port_type">port</TD></TR>
+			<TR><TD PORT="format_pos">12</TD><TD PORT="format_size">4</TD><TD>str(ASCII)</TD><TD PORT="format_type">format</TD></TR>
+			<TR><TD PORT="chip_pos">16</TD><TD PORT="chip_size">8</TD><TD>str(ASCII)</TD><TD PORT="chip_type">chip</TD></TR>
+			<TR><TD PORT="unknown4_pos">24</TD><TD PORT="unknown4_size">4</TD><TD>u4le</TD><TD PORT="unknown4_type">unknown4</TD></TR>
 			<TR><TD PORT="partitions_pos">28</TD><TD PORT="partitions_size">132</TD><TD>Partition</TD><TD PORT="partitions_type">partitions</TD></TR>
 			<TR><TD COLSPAN="4" PORT="partitions__repeat">repeat entry_count times</TD></TR>
 			<TR><TD PORT="signature_pos">...</TD><TD PORT="signature_size">0</TD><TD>SamsungSignature</TD><TD PORT="signature_type">signature</TD></TR>
 		</TABLE>>];
+		subgraph cluster__attributes {
+			label="SamsungPit::Attributes";
+			graph[style=dotted];
+
+			attributes__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="value_pos">0</TD><TD PORT="value_size">4</TD><TD>u4le</TD><TD PORT="value_type">value</TD></TR>
+			</TABLE>>];
+			attributes__inst__read [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">id</TD><TD BGCOLOR="#E0FFE0">value</TD></TR>
+				<TR><TD>read</TD><TD>true</TD></TR>
+			</TABLE>>];
+			attributes__inst__write [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">id</TD><TD BGCOLOR="#E0FFE0">value</TD></TR>
+				<TR><TD>write</TD><TD>(value &amp; 1) == 1</TD></TR>
+			</TABLE>>];
+			attributes__inst__stl [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">id</TD><TD BGCOLOR="#E0FFE0">value</TD></TR>
+				<TR><TD>stl</TD><TD>(value &amp; (1 &lt;&lt; 1)) == 2</TD></TR>
+			</TABLE>>];
+		}
+		subgraph cluster__update_attributes {
+			label="SamsungPit::UpdateAttributes";
+			graph[style=dotted];
+
+			update_attributes__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
+				<TR><TD PORT="value_pos">0</TD><TD PORT="value_size">4</TD><TD>u4le</TD><TD PORT="value_type">value</TD></TR>
+			</TABLE>>];
+			update_attributes__inst__fota [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">id</TD><TD BGCOLOR="#E0FFE0">value</TD></TR>
+				<TR><TD>fota</TD><TD>(value &amp; 1) == 1</TD></TR>
+			</TABLE>>];
+			update_attributes__inst__secure [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+				<TR><TD BGCOLOR="#E0FFE0">id</TD><TD BGCOLOR="#E0FFE0">value</TD></TR>
+				<TR><TD>secure</TD><TD>(value &amp; (1 &lt;&lt; 1)) == 2</TD></TR>
+			</TABLE>>];
+		}
 		subgraph cluster__partition {
 			label="SamsungPit::Partition";
 			graph[style=dotted];
 
 			partition__seq [label=<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
 				<TR><TD BGCOLOR="#E0FFE0">pos</TD><TD BGCOLOR="#E0FFE0">size</TD><TD BGCOLOR="#E0FFE0">type</TD><TD BGCOLOR="#E0FFE0">id</TD></TR>
-				<TR><TD PORT="binary_type_pos">0</TD><TD PORT="binary_type_size">4</TD><TD>u4le</TD><TD PORT="binary_type_type">binary_type</TD></TR>
-				<TR><TD PORT="device_type_pos">4</TD><TD PORT="device_type_size">4</TD><TD>u4le</TD><TD PORT="device_type_type">device_type</TD></TR>
+				<TR><TD PORT="binary_type_pos">0</TD><TD PORT="binary_type_size">4</TD><TD>u4le→BinaryType</TD><TD PORT="binary_type_type">binary_type</TD></TR>
+				<TR><TD PORT="device_type_pos">4</TD><TD PORT="device_type_size">4</TD><TD>u4le→DeviceType</TD><TD PORT="device_type_type">device_type</TD></TR>
 				<TR><TD PORT="identifier_pos">8</TD><TD PORT="identifier_size">4</TD><TD>u4le</TD><TD PORT="identifier_type">identifier</TD></TR>
-				<TR><TD PORT="attributes_pos">12</TD><TD PORT="attributes_size">4</TD><TD>u4le</TD><TD PORT="attributes_type">attributes</TD></TR>
-				<TR><TD PORT="update_attributes_pos">16</TD><TD PORT="update_attributes_size">4</TD><TD>u4le</TD><TD PORT="update_attributes_type">update_attributes</TD></TR>
+				<TR><TD PORT="attributes_pos">12</TD><TD PORT="attributes_size">4</TD><TD>Attributes</TD><TD PORT="attributes_type">attributes</TD></TR>
+				<TR><TD PORT="update_attributes_pos">16</TD><TD PORT="update_attributes_size">4</TD><TD>UpdateAttributes</TD><TD PORT="update_attributes_type">update_attributes</TD></TR>
 				<TR><TD PORT="block_size_or_offset_pos">20</TD><TD PORT="block_size_or_offset_size">4</TD><TD>u4le</TD><TD PORT="block_size_or_offset_type">block_size_or_offset</TD></TR>
 				<TR><TD PORT="block_count_pos">24</TD><TD PORT="block_count_size">4</TD><TD>u4le</TD><TD PORT="block_count_type">block_count</TD></TR>
 				<TR><TD PORT="file_offset_pos">28</TD><TD PORT="file_offset_size">4</TD><TD>u4le</TD><TD PORT="file_offset_type">file_offset</TD></TR>
@@ -45,4 +79,10 @@ digraph {
 	samsung_pit__seq:partitions_type -> partition__seq [style=bold];
 	samsung_pit__seq:entry_count_type -> samsung_pit__seq:partitions__repeat [color="#404040"];
 	samsung_pit__seq:signature_type -> samsung_signature__seq [style=bold];
+	attributes__seq:value_type -> attributes__inst__write [color="#404040"];
+	attributes__seq:value_type -> attributes__inst__stl [color="#404040"];
+	update_attributes__seq:value_type -> update_attributes__inst__fota [color="#404040"];
+	update_attributes__seq:value_type -> update_attributes__inst__secure [color="#404040"];
+	partition__seq:attributes_type -> attributes__seq [style=bold];
+	partition__seq:update_attributes_type -> update_attributes__seq [style=bold];
 }
